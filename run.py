@@ -1,4 +1,4 @@
-# feature for computer choose to randomly 
+# feature for computer choose to randomly.
 from random import randint
 
 
@@ -80,6 +80,7 @@ def find_ship(size):
         if size[enemy_row][enemy_col] != "#":
             return enemy_row, enemy_col
 
+
 def print_board(size):
     """
     Print out the board.
@@ -90,15 +91,40 @@ def print_board(size):
 
 
 def row_guess(size):
+    """
+    Row coordinates for players shot.
+    """
     valid_row = False
     print("Enter a number between 1 - {}".format(len(size)))
-    while valid row is not True:
-        guess_row = int(input("Guess row: "))
-        if guess_row not in range(1, len(sea) + 1):
-            print("Not a valid row, enter a number between 1 - {}".format(len(size)))
+    while valid_row is not True:
+        try:
+            guess_row = int(input("Guess row: "))
+            if guess_row not in range(1, len(size) + 1):
+                print("Not a valid row, enter a number between 1 - {}".format(len(size)))
+            else:
+                valid_row = True
+        except ValueError:
+            print("Not a number, try again")
+    return guess_row - 1
 
 
-# def col_guess(size)
+def col_guess(size):
+    """
+    Column coordinates for players shot.
+    """
+    valid_col = False
+    print("Enter a number between 1 - {}".format(len(size)))
+    while valid_col is not True:
+        try:
+            guess_col = int(input("Guess column: "))
+            if guess_col not in range(1, len(size) + 1):
+                print("Not a valid column, enter a number between 1 - {}".format(len(size)))
+            else:
+                valid_col = True
+        except ValueError:
+            print("Not a number, try again")
+    return guess_col - 1
+
 # def comp_shot
 # def player_shot
 # def new_game
