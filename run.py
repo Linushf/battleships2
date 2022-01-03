@@ -37,3 +37,15 @@ def user_ships(size):
                 print("Not valid row, enter a number 1 - {}".format(len(size) + 1))
             else:
                 valid_row = True
+
+#def random_row
+#def random_col
+#def find_ship
+#def print_board(size)
+#def row_guess(size)
+#def col_guess(size)
+#def comp_shot
+#def player_shot
+#def new_game
+#def game_play
+#def main()
