@@ -37,15 +37,32 @@ def user_ships(size):
                 print("Not valid row, enter a number 1 - {}".format(len(size) + 1))
             else:
                 valid_row = True
+        except ValueError:
+            print("Not a number, try again")
+    while valid_col is not True:
+        try:
+            user_row = int(input("Enter column for your ship: "))
+            if user_row not in range(1, len(size) + 1):
+                print("Not valid column, enter a number 1 - {}".format(len(size) + 1))
+            else:
+                valid_col = True
+        except ValueError:
+            print("Not a number, try again")
+    return size
 
-#def random_row
-#def random_col
-#def find_ship
-#def print_board(size)
-#def row_guess(size)
-#def col_guess(size)
-#def comp_shot
-#def player_shot
-#def new_game
-#def game_play
-#def main()
+def random_row:
+    """
+    Function to be used in comp_shop and find_ship to find a random row
+    """
+    return randint(0, len(sea) - 1)
+
+# def random_col
+# def find_ship
+# def print_board(size)
+# def row_guess(size)
+# def col_guess(size)
+# def comp_shot
+# def player_shot
+# def new_game
+# def game_play
+# def main()
