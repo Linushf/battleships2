@@ -1,7 +1,7 @@
 from random import randint
 
 
-def set_board():
+def set_board_size():
     """
     User chooses size of the gaming baord
     """
