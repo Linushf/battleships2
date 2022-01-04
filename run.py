@@ -32,25 +32,32 @@ def user_ships(size):
     """
     valid_row = False
     valid_col = False
-    print(("Where do you what to place your ships? Enter a number between 1 - {} ").format(len(size)))
+    user_row = None
+    user_col = None
+    print("Where do you what to place your ships? ")
+    print("Enter a number between 1 - {} ".format(len(size)))
     while valid_row is not True:
         try:
             user_row = int(input("Enter row for your ship: "))
             if user_row not in range(1, len(size) + 1):
-                print("Not valid row, enter a number 1 - {}".format(len(size) + 1))
+                print("Not valid row,")
+                print("enter a number 1 - {}".format(len(size) + 1))
             else:
                 valid_row = True
         except ValueError:
             print("Not a number, try again")
     while valid_col is not True:
         try:
-            user_row = int(input("Enter column for your ship: "))
-            if user_row not in range(1, len(size) + 1):
-                print("Not valid column, enter a number 1 - {}".format(len(size) + 1))
+            user_col = int(input("Enter column for your ship: "))
+            if user_col not in range(1, len(size) + 1):
+                print("Not valid column, ")
+                print("enter a number 1 - {}".format(len(size) + 1))
             else:
                 valid_col = True
         except ValueError:
             print("Not a number, try again")
+    if user_row and user_col:
+        size[user_row - 1][user_col - 1] = "#"
     return size
 
 
@@ -100,7 +107,8 @@ def row_guess(size):
         try:
             guess_row = int(input("Guess row: "))
             if guess_row not in range(1, len(size) + 1):
-                print("Not a valid row, enter a number between 1 - {}".format(len(size)))
+                print("Not a valid row, ")
+                print("enter a number between 1 - {}".format(len(size)))
             else:
                 valid_row = True
         except ValueError:
@@ -118,7 +126,8 @@ def col_guess(size):
         try:
             guess_col = int(input("Guess column: "))
             if guess_col not in range(1, len(size) + 1):
-                print("Not a valid column, enter a number between 1 - {}".format(len(size)))
+                print("Not a valid column, ")
+                print("enter a number between 1 - {}".format(len(size)))
             else:
                 valid_col = True
         except ValueError:
@@ -134,9 +143,11 @@ def comp_shot(size, comp_guess_count, comp_row, comp_col):
     while valid_comp_shot is not True:
         attack_row = random_row(size)
         attack_col = random_col(size)
+
         if size[attack_row][attack_col] == "#":
-            print("Enemy sunk your ship and you lose")
-            print("Computer sank your ship in {} tries".format(comp_guess_count))
+            print("Enemy sunk your ship and you lose\n")
+            print("Computer sank your ship ")
+            print("in {} turns".format(comp_guess_count))
             valid_comp_shot = True
             return True
         elif size[attack_row][attack_col] != "O":
@@ -155,7 +166,7 @@ def comp_shot(size, comp_guess_count, comp_row, comp_col):
 
 def user_shot(size, user_guess_count, comp_row, comp_col):
     """
-    Function to take user input and uses guess_row and guess _col
+    Function to take user input and uses guess_row and guess_col
     """
     valid_user_shot = False
     while valid_user_shot is not True:
@@ -186,7 +197,7 @@ def new_game():
     print("Choose YES or NO")
     while True:
         try:
-            answer = input("New game?").upper()
+            answer = input("New game? ").upper()
             if answer == "YES":
                 main()
                 return False
