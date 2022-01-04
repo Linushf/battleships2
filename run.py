@@ -178,6 +178,24 @@ def user_shot(size, user_guess_count, comp_row, comp_col):
             return True
     return False
 
+def new_game():
+    """
+    Ask the user if they would like to play another game.
+    """
+    print("Choose YES or NO")
+    while True:
+        try:
+            answer = input("New game?").upper()
+            if answer == "YES":
+                main()
+                return False
+            elif answer == "NO":
+                print("Thank you for playing, see you next time!")
+                return False
+            else:
+                print("Not a valid choice, choose 'Yes' or 'No'")
+        except ValueError:
+            print("Not a valid choice, choose 'Yes' or 'No'")
 
 
 # def new_game
