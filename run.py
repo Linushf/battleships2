@@ -153,14 +153,34 @@ def comp_shot(size, comp_guess_count, comp_row, comp_col):
     return False
 
 
+def user_shot(size, user_guess_count, comp_row, comp_col):
+    """
+    Function to take user input and uses guess_row and guess _col
+    """
+    valid_user_shot = False
+    while valid_user_shot is not True:
+        guess_row = row_guess(size)
+        guess_col = col_guess(size)
+
+        if size[guess_row][guess_col] == "*":
+            print("You've already shot at that location, try again")
+        elif size[guess_row][guess_col] == "#":
+            print("Do not kill yourself...")
+        elif guess_row != comp_row or guess_col != comp_col:
+            size[guess_row][guess_col] = "X"
+            print(" - Users turn - ")
+            print_board(size)
+            print(" - You missed - ")
+            valid_user_shot = True
+        else:
+            print("You sunk enemy battleship!")
+            print("It took {} tries to win".format(user_guess_count))
+            return True
+    return False
 
 
 
-# def player_shot
 # def new_game
 # def game_play
 # def main()
-# size = set_board_size()
-# print_board = user_ships(size)
-
 # main()
