@@ -178,6 +178,7 @@ def user_shot(size, user_guess_count, comp_row, comp_col):
             return True
     return False
 
+
 def new_game():
     """
     Ask the user if they would like to play another game.
@@ -198,7 +199,38 @@ def new_game():
             print("Not a valid choice, choose 'Yes' or 'No'")
 
 
-# def new_game
-# def game_play
-# def main()
-# main()
+def game_play(size, comp_row, comp_col):
+    """
+    Function that holds guess counting for both computer and user
+    """
+    user_guess_count = 1
+    comp_guess_count = 1
+    comp_sunk = False
+    user_sunk = False
+    while (comp_sunk is not True) and (user_sunk is not True):
+        comp_sunk = user_shot(size, user_guess_count, comp_row, comp_col)
+        user_guess_count += 1
+        if comp_sunk is True:
+            break
+        user_sunk = comp_shot(size, comp_guess_count, comp_row, comp_col)
+        comp_guess_count += 1
+        if user_sunk is True:
+            break
+
+
+def main():
+    """
+    Uses all functions written and runs the game.
+    """
+    size = set_board_size()
+    print_board(size)
+    size = user_ships(size)
+    print("----- Time for a game of Battleship -----")
+    print("# = User ship location, X = User miss, * = Computer miss")
+    print_board(size)
+    comp_row, comp_col = find_ship(size)
+    game_play(size, comp_row, comp_col)
+    new_game()
+
+
+main()
