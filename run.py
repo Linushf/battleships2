@@ -125,7 +125,37 @@ def col_guess(size):
             print("Not a number, try again")
     return guess_col - 1
 
-# def comp_shot
+
+def comp_shot(size, comp_guess_count, comp_row, comp_col):
+    """
+    Enemy (computer) choose a random, and valid, coordinate to shot.
+    """
+    valid_comp_shot = False
+    while valid_comp_shot is not True:
+        attack_row = random_row(size)
+        attack_col = random_col(size)
+        if size[attack_row][attack_col] == "#":
+            print("Enemy sunk your ship and you lose")
+            print("Computer sank your ship in {} tries".format(comp_guess_count))
+            valid_comp_shot = True
+            return True
+        elif size[attack_row][attack_col] != "O":
+            # Prevents computer duplicate coordinates
+            continue
+        elif attack_row == comp_row and attack_col == comp_col:
+            # Prevents computer from shoting their own ship
+            continue
+        else:
+            size[attack_row][attack_col] = "*"
+            print(" - Computers turn - ")
+            print_board(size)
+            valid_comp_shot = True
+    return False
+
+
+
+
+
 # def player_shot
 # def new_game
 # def game_play
