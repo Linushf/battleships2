@@ -164,7 +164,8 @@ def comp_shot(size, comp_guess_count, comp_row, comp_col):
             continue
         else:
             size[attack_row][attack_col] = "*"
-            print(" - Computer missed - ")
+            print(" - Computer fired at:")
+            print(f"Row: {attack_row + 1} Column: {attack_col + 1} MISS!\n")
             print_board(size)
             valid_comp_shot = True
     return False
@@ -189,7 +190,8 @@ def user_shot(size, user_guess_count, comp_row, comp_col):
             size[guess_row][guess_col] = "X"
             print(" - Users turn - ")
             print_board(size)
-            print(" - You missed - ")
+            print(" - You fired at:")
+            print(f"Row: {guess_row + 1} Column: {guess_col + 1} MISS!\n")
             valid_user_shot = True
         else:
             print("You sunk enemy battleship!")
