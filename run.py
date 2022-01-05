@@ -2,7 +2,7 @@
 from random import randint
 
 
-def set_board_size():
+def generate_board():
     """
     The user chooses size of the gaming board.
     """
@@ -14,19 +14,19 @@ def set_board_size():
                 "How big would you like the sea? (2 - 10):\n"))
             if board_size < 2:
                 print("Too smal, enter a number between 2 - 10")
-                return set_board_size()
+                return generate_board()
             elif board_size > 10:
                 print("Too large, enter a number between 2 - 10")
-                return set_board_size()
+                return generate_board()
             elif board_size <= 10 or board_size >= 2:
                 for _ in range(board_size):
                     board.append(["O"] * board_size)
                 valid = True
             else:
-                return set_board_size()
+                return generate_board()
         except ValueError:
             print("Not a number, try again")
-            return set_board_size()
+            return generate_board()
         return board
 
 
@@ -233,7 +233,7 @@ def main():
     """
     Uses all functions written and runs the game.
     """
-    board = set_board_size()
+    board = generate_board()
     print_board(board)
     board = user_ships(board)
     print("----- Time for a game of Battleship -----")
