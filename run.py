@@ -14,16 +14,16 @@ def set_board_size():
                 "How big would you like the sea? (2 - 10):\n"))
             if board_size < 2:
                 print("Too smal, enter a number between 2 - 10")
-                set_board_size()
+                return set_board_size()
             elif board_size > 10:
                 print("Too large, enter a number between 2 - 10")
-                set_board_size()
+                return set_board_size()
             elif board_size <= 10 or board_size >= 2:
                 for _ in range(board_size):
                     size.append(["O"] * board_size)
                 valid = True
             else:
-                set_board_size()
+                return set_board_size()
         except ValueError:
             print("Not a number, try again")
         return size
