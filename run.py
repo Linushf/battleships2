@@ -1,5 +1,5 @@
-# feature for computer choose to randomly.
 from random import randint
+# feature for computer choose to randomly.
 
 
 def set_board_size():
@@ -52,9 +52,7 @@ def user_ships(size):
             print("Not a number, try again")
     while valid_col is not True:
         try:
-
             user_col = int(input("Enter column for your ship:\n"))
-            
             if user_col not in range(1, len(size) + 1):
                 print("Not valid column, ")
                 print("enter a number 1 - {}".format(len(size) + 1))
@@ -111,7 +109,7 @@ def row_guess(size):
     print("Enter a number between 1 - {}".format(len(size)))
     while valid_row is not True:
         try:
-            guess_row = int(input("Guess row: "))
+            guess_row = int(input("Guess row: \n"))
             if guess_row not in range(1, len(size) + 1):
                 print("Not a valid row, ")
                 print("enter a number between 1 - {}".format(len(size)))
@@ -130,7 +128,7 @@ def col_guess(size):
     print("Enter a number between 1 - {}".format(len(size)))
     while valid_col is not True:
         try:
-            guess_col = int(input("Guess column: "))
+            guess_col = int(input("Guess column: \n"))
             if guess_col not in range(1, len(size) + 1):
                 print("Not a valid column, ")
                 print("enter a number between 1 - {}".format(len(size)))
@@ -207,7 +205,7 @@ def new_game():
     print("Choose YES or NO")
     while True:
         try:
-            answer = input("New game? ").upper()
+            answer = input("New game? \n").upper()
             if answer == "YES":
                 main()
                 return False
