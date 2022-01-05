@@ -10,8 +10,10 @@ def set_board_size():
     valid = False
     while valid is not True:
         try:
+
             board_size = int(input(
-                "How big would you like the sea? (2 - 10): "))
+                "How big would you like the sea? (2 - 10):\n"))
+
             if board_size < 2:
                 print("Too smal, enter a number between 2 - 10")
             elif board_size > 10:
@@ -38,7 +40,9 @@ def user_ships(size):
     print("Enter a number between 1 - {} ".format(len(size)))
     while valid_row is not True:
         try:
-            user_row = int(input("Enter row for your ship: "))
+
+            user_row = int(input("Enter row for your ship:\n"))
+
             if user_row not in range(1, len(size) + 1):
                 print("Not valid row,")
                 print("enter a number 1 - {}".format(len(size) + 1))
@@ -48,7 +52,9 @@ def user_ships(size):
             print("Not a number, try again")
     while valid_col is not True:
         try:
-            user_col = int(input("Enter column for your ship: "))
+
+            user_col = int(input("Enter column for your ship:\n"))
+            
             if user_col not in range(1, len(size) + 1):
                 print("Not valid column, ")
                 print("enter a number 1 - {}".format(len(size) + 1))
@@ -77,7 +83,7 @@ def random_col(size):
 
 def find_ship(size):
     """
-    Computer chooses a hidden ship location 
+    Computer chooses a hidden ship location
     away from user ship location.
     """
     valid_enemy_location = False
@@ -158,7 +164,7 @@ def comp_shot(size, comp_guess_count, comp_row, comp_col):
             continue
         else:
             size[attack_row][attack_col] = "*"
-            print(" - Computers turn - ")
+            print(" - Computer missed - ")
             print_board(size)
             valid_comp_shot = True
     return False
@@ -174,9 +180,11 @@ def user_shot(size, user_guess_count, comp_row, comp_col):
         guess_col = col_guess(size)
 
         if size[guess_row][guess_col] == "*":
-            print("You've already shot at that location, try again")
+            print("Opponent already shot at that location, try again")
         elif size[guess_row][guess_col] == "#":
             print("Do not kill yourself...")
+        elif size[guess_row][guess_col] == "X":
+            print("You've already shot at that location, try again")
         elif guess_row != comp_row or guess_col != comp_col:
             size[guess_row][guess_col] = "X"
             print(" - Users turn - ")
