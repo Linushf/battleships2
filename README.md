@@ -106,7 +106,8 @@ As a player, I want to initialize the game easily and be able to choose how quic
 ## Testing
 
 - __I manually tested this code using following:__
-
+    
+    - 
     - My local python terminal installed on computer to create most of the code.
     - Tried to input failing values and errors appears as expected, the game does not crash.
     - [Pep8 online checker.](https://codeinstitute.net/) No errors returned when checking the code. 
@@ -118,10 +119,6 @@ As a player, I want to initialize the game easily and be able to choose how quic
 
     - When playing the game one bug I found was that it was possible to shoot at the same spot multiple times but not on the user's own ships and not on the same coordinates where the computer had already shot. This was easily solved by changing the "if/elif"-statements for user shots.
 
-- __Remaining bugs__
-    
-    There is no bugs remaining.
-
 - __Responsiveness__ 
 
     - At the top of this README.md a picture from "Am I Responsive" is provided. 
@@ -131,6 +128,7 @@ As a player, I want to initialize the game easily and be able to choose how quic
 - __Gitpod__
     - The code to this project is created on GidPod and is readable on my GitHub page. [View the project here](https://linushf.github.io/battleship2/)
 
+- __Heroku__
     - This project is deployed to Heroku and I deployed the project with these steps:
         - Setting up a Heroku account and creating a new application by clicking "create new app"-button on the start page.
         - In settings I clicked "cofig vars" and provided a key and a value provied by Code Institute.

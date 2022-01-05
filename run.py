@@ -1,12 +1,12 @@
+""" docstring """
 from random import randint
-# feature for computer choose to randomly.
 
 
 def set_board_size():
     """
     The user chooses size of the gaming board.
     """
-    size = []
+    board = []
     valid = False
     while valid is not True:
         try:
@@ -20,16 +20,17 @@ def set_board_size():
                 return set_board_size()
             elif board_size <= 10 or board_size >= 2:
                 for _ in range(board_size):
-                    size.append(["O"] * board_size)
+                    board.append(["O"] * board_size)
                 valid = True
             else:
                 return set_board_size()
         except ValueError:
             print("Not a number, try again")
-        return size
+            return set_board_size()
+        return board
 
 
-def user_ships(size):
+def user_ships(board):
     """
     User input coordinates for where he/she would like to place
     their ship.
@@ -39,13 +40,13 @@ def user_ships(size):
     user_row = None
     user_col = None
     print("Where do you what to place your ships? ")
-    print("Enter a number between 1 - {} ".format(len(size)))
+    print("Enter a number between 1 - {} ".format(len(board)))
     while valid_row is not True:
         try:
             user_row = int(input("Enter row for your ship:\n"))
-            if user_row not in range(1, len(size) + 1):
+            if user_row not in range(1, len(board) + 1):
                 print("Not valid row,")
-                print("enter a number 1 - {}".format(len(size) + 1))
+                print("enter a number 1 - {}".format(len(board)))
             else:
                 valid_row = True
         except ValueError:
@@ -53,66 +54,59 @@ def user_ships(size):
     while valid_col is not True:
         try:
             user_col = int(input("Enter column for your ship:\n"))
-            if user_col not in range(1, len(size) + 1):
+            if user_col not in range(1, len(board) + 1):
                 print("Not valid column, ")
-                print("enter a number 1 - {}".format(len(size) + 1))
+                print("enter a number 1 - {}".format(len(board)))
             else:
                 valid_col = True
         except ValueError:
             print("Not a number, try again")
     if user_row and user_col:
-        size[user_row - 1][user_col - 1] = "#"
-    return size
+        board[user_row - 1][user_col - 1] = "#"
+    return board
 
 
-def random_row(size):
+def random_row_and_col(board):
     """
     Function to be used in comp_shop and find_ship to find a random row
     """
-    return randint(0, len(size) - 1)
+    return randint(0, len(board) - 1)
 
 
-def random_col(size):
-    """
-    Function to be used in comp_shop and find_ship to find a random column
-    """
-    return randint(0, len(size) - 1)
-
-
-def find_ship(size):
+def find_ship(board):
     """
     Computer chooses a hidden ship location
     away from user ship location.
     """
     valid_enemy_location = False
     while valid_enemy_location is not True:
-        enemy_row = random_row(size)
-        enemy_col = random_col(size)
-        if size[enemy_row][enemy_col] != "#":
+        enemy_row = random_row_and_col(board)
+        enemy_col = random_row_and_col(board)
+        if board[enemy_row][enemy_col] != "#":
             return enemy_row, enemy_col
 
 
-def print_board(size):
+def print_board(board):
     """
     Print out the board.
     """
-    for row in size:
+    for row in board:
         print(("   ").join(row))
     print(" ")
 
 
-def row_guess(size):
+def row_guess(board):
     """
     Row coordinates for players shot.
     """
     valid_row = False
-    print("Enter a number between 1 - {}".format(len(size)))
+    print("Enter a number between 1 - {}".format(len(board)))
     while valid_row is not True:
         try:
             guess_row = int(input("Guess row: \n"))
-            if guess_row not in range(1, len(size) + 1):
+            if guess_row not in range(1, len(board) + 1):
                 print("Not a valid row, ")
-                print("enter a number between 1 - {}".format(len(size)))
+                print("enter a number between 1 - {}".format(len(board)))
             else:
                 valid_row = True
         except ValueError:
@@ -120,18 +114,18 @@ def row_guess(size):
     return guess_row - 1
 
 
-def col_guess(size):
+def col_guess(board):
     """
     Column coordinates for players shot.
     """
     valid_col = False
-    print("Enter a number between 1 - {}".format(len(size)))
+    print("Enter a number between 1 - {}".format(len(board)))
     while valid_col is not True:
         try:
             guess_col = int(input("Guess column: \n"))
-            if guess_col not in range(1, len(size) + 1):
+            if guess_col not in range(1, len(board) + 1):
                 print("Not a valid column, ")
-                print("enter a number between 1 - {}".format(len(size)))
+                print("enter a number between 1 - {}".format(len(board)))
             else:
                 valid_col = True
         except ValueError:
@@ -139,55 +133,55 @@ def col_guess(size):
     return guess_col - 1
 
 
-def comp_shot(size, comp_guess_count, comp_row, comp_col):
+def comp_shot(board, comp_guess_count, comp_row, comp_col):
     """
     Enemy (computer) choose a random, and valid, coordinate to shot.
     """
     valid_comp_shot = False
     while valid_comp_shot is not True:
-        attack_row = random_row(size)
-        attack_col = random_col(size)
+        attack_row = random_row_and_col(board)
+        attack_col = random_row_and_col(board)
 
-        if size[attack_row][attack_col] == "#":
+        if board[attack_row][attack_col] == "#":
             print("Enemy sunk your ship and you lose\n")
             print("Computer sank your ship ")
             print("in {} turns".format(comp_guess_count))
             valid_comp_shot = True
             return True
-        elif size[attack_row][attack_col] != "O":
+        elif board[attack_row][attack_col] != "O":
             # Prevents computer duplicate coordinates
             continue
         elif attack_row == comp_row and attack_col == comp_col:
             # Prevents computer from shoting their own ship
             continue
         else:
-            size[attack_row][attack_col] = "*"
+            board[attack_row][attack_col] = "*"
             print(" - Computer fired at:")
             print(f"Row: {attack_row + 1} Column: {attack_col + 1} MISS!\n")
-            print_board(size)
+            print_board(board)
             valid_comp_shot = True
     return False
 
 
-def user_shot(size, user_guess_count, comp_row, comp_col):
+def user_shot(board, user_guess_count, comp_row, comp_col):
     """
     Function to take user input and uses guess_row and guess_col
     """
     valid_user_shot = False
     while valid_user_shot is not True:
-        guess_row = row_guess(size)
-        guess_col = col_guess(size)
+        guess_row = row_guess(board)
+        guess_col = col_guess(board)
 
-        if size[guess_row][guess_col] == "*":
+        if board[guess_row][guess_col] == "*":
             print("Opponent already shot at that location, try again")
-        elif size[guess_row][guess_col] == "#":
+        elif board[guess_row][guess_col] == "#":
             print("Do not kill yourself...")
-        elif size[guess_row][guess_col] == "X":
+        elif board[guess_row][guess_col] == "X":
             print("You've already shot at that location, try again")
         elif guess_row != comp_row or guess_col != comp_col:
-            size[guess_row][guess_col] = "X"
+            board[guess_row][guess_col] = "X"
             print(" - Users turn - ")
-            print_board(size)
+            print_board(board)
             print(" - You fired at:")
             print(f"Row: {guess_row + 1} Column: {guess_col + 1} MISS!\n")
             valid_user_shot = True
@@ -204,21 +198,19 @@ def new_game():
     """
     print("Choose YES or NO")
     while True:
-        try:
-            answer = input("New game? \n").upper()
-            if answer == "YES":
-                main()
-                return False
-            elif answer == "NO":
-                print("Thank you for playing, see you next time!")
-                return False
-            else:
-                print("Not a valid choice, choose 'Yes' or 'No'")
-        except ValueError:
+        answer = input("New game? \n").upper()
+        if answer == "YES":
+            main()
+            return False
+        elif answer == "NO":
+            print("Thank you for playing, see you next time!")
+            return False
+        else:
             print("Not a valid choice, choose 'Yes' or 'No'")
+            return new_game()
 
 
-def game_play(size, comp_row, comp_col):
+def game_play(board, comp_row, comp_col):
     """
     Function that holds guess counting for both computer and user
     """
@@ -227,11 +219,11 @@ def game_play(size, comp_row, comp_col):
     comp_sunk = False
     user_sunk = False
     while (comp_sunk is not True) and (user_sunk is not True):
-        comp_sunk = user_shot(size, user_guess_count, comp_row, comp_col)
+        comp_sunk = user_shot(board, user_guess_count, comp_row, comp_col)
         user_guess_count += 1
         if comp_sunk is True:
             break
-        user_sunk = comp_shot(size, comp_guess_count, comp_row, comp_col)
+        user_sunk = comp_shot(board, comp_guess_count, comp_row, comp_col)
         comp_guess_count += 1
         if user_sunk is True:
             break
@@ -241,15 +233,16 @@ def main():
     """
     Uses all functions written and runs the game.
     """
-    size = set_board_size()
-    print_board(size)
-    size = user_ships(size)
+    board = set_board_size()
+    print_board(board)
+    board = user_ships(board)
     print("----- Time for a game of Battleship -----")
     print("# = User ship location, X = User miss, * = Computer miss")
-    print_board(size)
-    comp_row, comp_col = find_ship(size)
-    game_play(size, comp_row, comp_col)
+    print_board(board)
+    comp_row, comp_col = find_ship(board)
+    game_play(board, comp_row, comp_col)
     new_game()
 
 
-main()
+if __name__ == "__main__":
+    main()
