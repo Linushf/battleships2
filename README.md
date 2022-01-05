@@ -17,7 +17,7 @@
 
 The purpose of this site is to create an easy and well-coded game in Python. The game is only coded in Python and created in GitPod. View my [GitHub](https://github.com/Linushf/battleships2). 
 
-The game itself is a widely known game called "Battleship".
+The game itself is a widely known game called "Battleship" and if you are not familiar with this game you can read about it on [Wikipedia](https://en.wikipedia.org/wiki/Battleship_(game))
 
 Socially this game can be played by two users against the computer. It doesn't give the user a better chance of winning but it is always better to share fun and excitement.
 This page is the third (out of five) milestone project to become a Full Stack Developer. The course is provided by [Code Institute](https://codeinstitute.net/).
@@ -26,7 +26,7 @@ This page is the third (out of five) milestone project to become a Full Stack De
 
 ## How to play
 
-The game is very easy to understand, you simply choose board size and where you want to place your ship and the game is on. The computer has also chosen a spot on the game board and the first one who fires at the other player's ship wins. The computer and player play on the same board and the battleships occupies one "O" on the board.
+This game is very much like the game as we know it but it is played on one board only. You simply choose board size and where you want to place your ship and the game is on. The computer has also chosen a spot on the game board and the first one who fires at the other player's ship wins. The computer and player play on the same board and the battleships occupies one "O" on the board. On the game board a # = User ship location, X = User miss and * = Computer miss.
 
 ## User Stories
 
