@@ -10,18 +10,20 @@ def set_board_size():
     valid = False
     while valid is not True:
         try:
-
             board_size = int(input(
                 "How big would you like the sea? (2 - 10):\n"))
-
             if board_size < 2:
                 print("Too smal, enter a number between 2 - 10")
+                set_board_size()
             elif board_size > 10:
                 print("Too large, enter a number between 2 - 10")
-            else:
+                set_board_size()
+            elif board_size <= 10 or board_size >= 2:
                 for _ in range(board_size):
                     size.append(["O"] * board_size)
                 valid = True
+            else:
+                set_board_size()
         except ValueError:
             print("Not a number, try again")
         return size
@@ -40,9 +42,7 @@ def user_ships(size):
     print("Enter a number between 1 - {} ".format(len(size)))
     while valid_row is not True:
         try:
-
             user_row = int(input("Enter row for your ship:\n"))
-
             if user_row not in range(1, len(size) + 1):
                 print("Not valid row,")
                 print("enter a number 1 - {}".format(len(size) + 1))
