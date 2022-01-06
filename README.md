@@ -107,7 +107,6 @@ As a player, I want to initialize the game easily and be able to choose how quic
 
 - __I manually tested this code using following:__
     
-    - 
     - My local python terminal installed on computer to create most of the code.
     - Tried to input failing values and errors appears as expected, the game does not crash.
     - [Pep8 online checker.](https://codeinstitute.net/) No errors returned when checking the code. 
@@ -127,6 +126,9 @@ As a player, I want to initialize the game easily and be able to choose how quic
 
 - __Gitpod__
     - The code to this project is created on GidPod and is readable on my GitHub page. [View the project here](https://linushf.github.io/battleship2/)
+    - A template on GitHub is provided by Code Institute and inside that template I clicked "use this template".
+    - In the "create new repository" page i choosed a name for this repository "Battleship2".
+    - Clicked "create new repository from this template" 
 
 - __Heroku__
     - This project is deployed to Heroku and I deployed the project with these steps:
