@@ -1,4 +1,6 @@
-""" docstring """
+"""
+Randint generates a random integer between the first parameter and the second.
+"""
 from random import randint
 
 
