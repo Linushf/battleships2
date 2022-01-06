@@ -32,7 +32,7 @@ def generate_board():
         return board
 
 
-def user_ships(board):
+def user_ships_location(board):
     """
     User input coordinates for where he/she would like to place
     their ship.
@@ -68,22 +68,23 @@ def user_ships(board):
     return board
 
 
-def random_row_and_col(board):
+def generate_random_row_and_col(board):
     """
-    Function to be used in comp_shop and find_ship to find a random row
+    Function to be used in comp_shop and
+    place_enemy_ship(board) to find a pick a row
     """
     return randint(0, len(board) - 1)
 
 
-def find_ship(board):
+def place_enemy_ship(board):
     """
     Computer chooses a hidden ship location
     away from user ship location.
     """
     valid_enemy_location = False
     while valid_enemy_location is not True:
-        enemy_row = random_row_and_col(board)
-        enemy_col = random_row_and_col(board)
+        enemy_row = generate_random_row_and_col(board)
+        enemy_col = generate_random_row_and_col(board)
         if board[enemy_row][enemy_col] != '#':
             return enemy_row, enemy_col
 
@@ -97,7 +98,7 @@ def print_board(board):
     print(' ')
 
 
-def row_guess(board):
+def user_row_guess(board):
     """
     Row coordinates for players shot.
     """
@@ -116,7 +117,7 @@ def row_guess(board):
     return guess_row - 1
 
 
-def col_guess(board):
+def user_column_guess(board):
     """
     Column coordinates for players shot.
     """
@@ -135,14 +136,14 @@ def col_guess(board):
     return guess_col - 1
 
 
-def comp_shot(board, comp_guess_count, comp_row, comp_col):
+def generate_computer_shot(board, comp_guess_count, comp_row, comp_col):
     """
     Enemy (computer) choose a random, and valid, coordinate to shot.
     """
     valid_comp_shot = False
     while valid_comp_shot is not True:
-        attack_row = random_row_and_col(board)
-        attack_col = random_row_and_col(board)
+        attack_row = generate_random_row_and_col(board)
+        attack_col = generate_random_row_and_col(board)
 
         if board[attack_row][attack_col] == '#':
             print('Enemy sunk your ship and you lose\n')
@@ -165,14 +166,14 @@ def comp_shot(board, comp_guess_count, comp_row, comp_col):
     return False
 
 
-def user_shot(board, user_guess_count, comp_row, comp_col):
+def generate_user_shot(board, user_guess_count, comp_row, comp_col):
     """
     Function to take user input and uses guess_row and guess_col
     """
     valid_user_shot = False
     while valid_user_shot is not True:
-        guess_row = row_guess(board)
-        guess_col = col_guess(board)
+        guess_row = user_row_guess(board)
+        guess_col = user_column_guess(board)
 
         if board[guess_row][guess_col] == '*':
             print('Opponent already shot at that location, try again')
@@ -212,20 +213,22 @@ def new_game():
             return new_game()
 
 
-def game_play(board, comp_row, comp_col):
+def count_turns(board, comp_row, comp_col):
     """
-    Function that holds guess counting for both computer and user
+    Function that holds guess counting for both computer and user.
     """
     user_guess_count = 1
     comp_guess_count = 1
     comp_sunk = False
     user_sunk = False
     while (comp_sunk is not True) and (user_sunk is not True):
-        comp_sunk = user_shot(board, user_guess_count, comp_row, comp_col)
+        comp_sunk = (generate_user_shot(board,
+                     user_guess_count, comp_row, comp_col))
         user_guess_count += 1
         if comp_sunk is True:
             break
-        user_sunk = comp_shot(board, comp_guess_count, comp_row, comp_col)
+        user_sunk = (generate_computer_shot(board,
+                     comp_guess_count, comp_row, comp_col))
         comp_guess_count += 1
         if user_sunk is True:
             break
@@ -237,12 +240,12 @@ def main():
     """
     board = generate_board()
     print_board(board)
-    board = user_ships(board)
+    board = user_ships_location(board)
     print('----- Time for a game of Battleship -----')
     print('# = User ship location, X = User miss, * = Computer miss')
     print_board(board)
-    comp_row, comp_col = find_ship(board)
-    game_play(board, comp_row, comp_col)
+    comp_row, comp_col = place_enemy_ship(board)
+    count_turns(board, comp_row, comp_col)
     new_game()
 
 
